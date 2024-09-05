@@ -1,5 +1,6 @@
 import turtle
 import time
+from scoreboard import Scoreboard
 
 # Screen setup
 win = turtle.Screen()
@@ -39,6 +40,9 @@ for x in range(-350, 400, 100):
         brick.penup()
         brick.goto(x, y)
         bricks.append(brick)
+
+# Scoreboard setup
+scoreboard = Scoreboard()
 
 # Functions
 def paddle_right():
@@ -84,7 +88,8 @@ while True:
         ball.dy *= -1
 
     # Paddle and ball collision
-    if (ball.ycor() > -240 and ball.ycor() < -230) and (ball.xcor() > paddle.xcor() - 50 and ball.xcor() < paddle.xcor() + 50):
+    if (ball.ycor() > paddle.ycor() - 10 and ball.ycor() < paddle.ycor() + 10) and (ball.xcor() > paddle.xcor() - 75 and ball.xcor() < paddle.xcor() + 75):
+        # print("Paddle and Ball Collision")
         ball.sety(-230)
         ball.dy *= -1
 
@@ -94,6 +99,7 @@ while True:
             ball.dy *= -1
             brick.hideturtle()
             bricks.remove(brick)
+            scoreboard.point()
     
     time.sleep(0.1)  # Adjust for frame rate
 
