@@ -12,8 +12,17 @@ class Scoreboard(Turtle):
 
     def update_scoreboard(self):
         self.clear()
-        self.goto(100, 200)
-        self.write(arg=self.score, align="center", font=("Courier", 80, "normal"))
+        self.goto(100, 225)
+        display_score = "Score: " + str(self.score)
+        self.write(arg=display_score, align="center", font=("Courier", 30, "normal"))
+
+    def message(self, display_text):
+        self.clear()
+        self.goto(0, 0)
+        self.write(arg=display_text, align="center", font=("Courier", 50, "normal"))
+        self.goto(100, 225)
+        display_score = "Score: " + str(self.score)
+        self.write(arg=display_score, align="center", font=("Courier", 30, "normal"))
 
     def point(self):
         self.score += 4

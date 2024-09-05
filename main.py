@@ -2,6 +2,8 @@ import turtle
 import time
 from scoreboard import Scoreboard
 
+# Adapted from ChatGPT generated code in playground.py
+
 # Screen setup
 win = turtle.Screen()
 win.title("Breakout Game")
@@ -27,6 +29,7 @@ ball.penup()
 ball.goto(0, -230)
 ball.dx = 10  # 0.15
 ball.dy = 10  # 0.15
+ball.lives = 3
 
 # Brick setup
 brick_color = "red"
@@ -86,6 +89,10 @@ while True:
     if ball.ycor() < -290:
         ball.goto(0, -230)
         ball.dy *= -1
+        ball.lives -= 1
+        if ball.lives == 0:
+            scoreboard.message("You Lost!")
+            break
 
     # Paddle and ball collision
     if (ball.ycor() > paddle.ycor() - 10 and ball.ycor() < paddle.ycor() + 10) and (ball.xcor() > paddle.xcor() - 75 and ball.xcor() < paddle.xcor() + 75):
@@ -101,6 +108,10 @@ while True:
             bricks.remove(brick)
             scoreboard.point()
     
+    if len(bricks) == 0:
+        scoreboard.message("You Won!")
+        break
+
     time.sleep(0.1)  # Adjust for frame rate
 
 # Keep the window open
